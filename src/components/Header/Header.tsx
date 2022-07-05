@@ -1,7 +1,9 @@
 import React, {FC} from 'react';
 import './Header.css'
+import {useAppSelector} from "../../hooks/redux";
 
 const Header: FC = () => {
+    const{isLog} =useAppSelector(state => state.authReducer)
     return (
         <div>
             <div className={'header_menu'}>
@@ -48,7 +50,7 @@ const Header: FC = () => {
                     <img src="/image-for-header/cart.png" width={'80px'} height={'50px'} alt="cart"/>
                 </div>
                 <div>
-                    <a href="/auth/login"> Увійти</a>
+                    <a href="/auth/login">{isLog?<div>Вийти</div>:<div>Увійти</div>} </a>
                 </div>
             </div>
             <hr/>

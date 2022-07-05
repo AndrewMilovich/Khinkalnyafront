@@ -4,6 +4,7 @@ import UserRegistration from "./components/User/UserRegistration/UserRegistratio
 import {Route, Routes} from "react-router-dom";
 import UserLogin from "./components/User/UserLogin/UserLogin";
 import Layout from "./components/Layout/Layout";
+import AddDish from "./components/addDish/addDish";
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
                 <Route path={"/"} element={<Layout/>}>
                     <Route path={'/auth/registration'} element={<UserRegistration/>}></Route>
                     <Route path={'/auth/login'} element={<UserLogin/>}></Route>
+                    <Route path={'/admin/addDish'} element={<AddDish/>}></Route>
                 </Route>
             </Routes>
         </div>

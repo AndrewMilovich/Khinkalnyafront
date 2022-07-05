@@ -5,5 +5,7 @@ export default apiURL;
 export const urls={
     registration: '/auth/registration',
     login: '/auth/login',
-    user:'/user'
+    user:'/user',
+    dish:'/dish',
+    locality:'/dish/locality'
 }

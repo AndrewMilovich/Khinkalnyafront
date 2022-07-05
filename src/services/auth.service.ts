@@ -3,6 +3,6 @@ import {urls} from "../constants";
 import {IUser} from "../interfaces";
 
 export const authService={
-    registration:(data:IUser)=>axiosService.post<IUser>(urls.registration,data),
-    login: (data:Partial<IUser>)=>axiosService.post<IUser>(urls.login,data)
+    registration:(data:IUser)=>axiosService.post<any>(urls.registration,data),
+    login: (data:Partial<IUser>)=>axiosService.post<any>(urls.login,data)
 }
