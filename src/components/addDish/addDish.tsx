@@ -1,13 +1,16 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useForm} from "react-hook-form";
-import {useAppDispatch} from "../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {IDish} from "../../interfaces/dish.interface";
-import {addDish} from "../../store/slices/admin.slice";
+import {addDish, getLocality} from "../../store/slices/admin.slice";
 
 const AddDish: FC = () => {
+    const {locality} = useAppSelector(state => state.adminReducer)
     const {register, handleSubmit, reset} = useForm()
     const dispatch = useAppDispatch()
-
+    useEffect(() => {
+        dispatch(getLocality())
+    }, [])
     const submit: any = async (data: IDish) => {
         const formData = new FormData();
         formData.append('image', data.image[0])
@@ -17,9 +20,8 @@ const AddDish: FC = () => {
         formData.append('description', data.description)
         formData.append('localityId', data.localityId)
         await dispatch(addDish(formData))
-        console.log(data.image)
-    }
 
+    }
 
     return (
 
@@ -29,22 +31,22 @@ const AddDish: FC = () => {
             <form onSubmit={handleSubmit(submit)}>
                 <div>
 
+                    {/*{locality.map(value => <div>{value}</div>)}*/}
                     <div><input type="file" {...register('image')}/></div>
                     <div><input type="text" placeholder={'name'}{...register('name')}/></div>
                     <div><input type="number" placeholder={'price'}{...register('price')}/></div>
                     <div><input type="number" placeholder={'weight'}{...register('weight')}/></div>
                     <div><input type="text" placeholder={'description'}{...register('description')}/></div>
-                    <div><select {...register('localityId')}>
-                        <option value="1">Перші страви</option>
-                        <option value="2">Хінкалі</option>
-                        <option value="3">Гарячі закуски</option>
-                    </select></div>
+                    <select {...register('localityId')}  >
+                        <option value=""></option>
+                        {locality && locality.map(result => <option key={result.id} value={result.id}>{result.name}</option>)}
+                    </select>
                     <div><input type="text" placeholder={'ingredients'}{...register('ingredients')}/></div>
                     <div><input type="text" placeholder={'Restaurant'}{...register('Restaurant')}/></div>
                     <div>
-                        {/*<Link to={'/user/id'}>*/}
+
                         <button>Add</button>
-                        {/*</Link>*/}
+
                     </div>
                 </div>
             </form>

@@ -1,11 +1,12 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../interfaces";
 import {authService} from "../../services/auth.service";
+import {userService} from "../../services/user.service";
 
 const initialState = {
     result: [],
     accessToken: '',
-    isLog:false,
+    isLog: false,
     refreshToken: ''
 }
 export const registrationUser = createAsyncThunk(
@@ -20,12 +21,26 @@ export const registrationUser = createAsyncThunk(
     }
 )
 
+export const getAll = createAsyncThunk(
+    'auth/user',
+    async (_, {dispatch, getState}) => {
+        try {
+            const response = await userService.getAllUsers();
+            console.log(response)
+            // dispatch(setUsers(response.data))
+
+        }catch (e) {
+            console.log(e);
+        }
+
+    });
+
 
 export const loginUser = createAsyncThunk(
     'auth/login',
     async (data: Partial<IUser>, {dispatch, getState}) => {
+
         let response = await authService.login(data);
-        console.log(response.data);
         dispatch(setToken(response.data))
     }
 )
@@ -35,17 +50,20 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setToken: (state, action: any) => {
+            localStorage.setItem('access', action.payload.tokenPair.accessToken)
+            localStorage.setItem('refresh', action.payload.tokenPair.refreshToken)
+            state.isLog = true;
+        },
+        setUsers: (state, action: any) => {
+            console.log('-----------------');
             console.log(action.payload);
-            state.accessToken = action.payload.tokenPair.accessToken;
-            state.refreshToken = action.payload.tokenPair.refreshToken;
-            localStorage.setItem('access',action.payload.tokenPair.accessToken)
-            localStorage.setItem('refresh',action.payload.tokenPair.refreshToken)
-            state.isLog=true;
+            console.log('-----------------');
+            // state.users = action.payload
         }
     }
 })
 const authReducer = authSlice.reducer;
 export default authReducer;
 export const {
-    setToken
+    setToken,setUsers
 } = authSlice.actions

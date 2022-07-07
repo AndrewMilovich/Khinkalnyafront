@@ -1,23 +1,23 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {IUser} from "../../../interfaces";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {loginUser} from "../../../store";
 import {userService} from "../../../services/user.service";
 
+
 const UserLogin: FC = () => {
-   const accessToken = localStorage.getItem('access');
+    const accessToken = localStorage.getItem('access');
     const {isLog}=useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
     const {register, handleSubmit, reset} = useForm()
     const submit: any = async (data: Partial<IUser>) => {
        await dispatch(loginUser(data))
     }
-    if (accessToken)
-    {
-        const allUsers = userService.getAllUsers(accessToken);
-        console.log(allUsers);
-    }
+
+    //     const promise = userService.getAllUsers();
+    // console.log(promise)
+
 
     return (
         <div>
