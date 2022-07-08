@@ -38,7 +38,7 @@ const AddDish: FC = () => {
                     <div><input type="number" placeholder={'weight'}{...register('weight')}/></div>
                     <div><input type="text" placeholder={'description'}{...register('description')}/></div>
                     <select {...register('localityId')}  >
-                        <option value=""></option>
+                        <option value="">Виберіть цех приготування</option>
                         {locality && locality.map(result => <option key={result.id} value={result.id}>{result.name}</option>)}
                     </select>
                     <div><input type="text" placeholder={'ingredients'}{...register('ingredients')}/></div>

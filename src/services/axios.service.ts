@@ -10,7 +10,6 @@ export const errorInterceptor = (axiosInstance: any) => {
     axiosInstance.interceptors.response.use((response:any) => {
         return response
     }, async (error:any) => {
-        console.log(error);
         const originalConfig = error.config
         if (error.response.data.statusCode === 401) {
             console.log(error.response.data)
@@ -23,13 +22,14 @@ export const errorInterceptor = (axiosInstance: any) => {
             localStorage.setItem('refresh', tokenPair.refreshToken)
             return axiosService(originalConfig)
         }
+        console.log(error.response)
+        return error.response
     });
 };
 
 export const updateHeaderInterceptor = (axiosInstance:any) => {
     axiosInstance.interceptors.request.use((request:any) => {
         const access = localStorage.getItem('access');
-
         request.headers={
             Authorization:` Bearer ${access}`
         };

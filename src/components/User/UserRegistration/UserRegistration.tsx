@@ -3,6 +3,7 @@ import {useForm} from 'react-hook-form';
 import {IUser} from "../../../interfaces";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {registrationUser} from "../../../store";
+import {Link} from "react-router-dom";
 
 const UserRegistration: FC = () => {
     const {register, handleSubmit, reset} = useForm()

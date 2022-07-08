@@ -1,9 +1,22 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import './Header.css'
-import {useAppSelector} from "../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {logoutUser} from "../../store";
+import {Link} from "react-router-dom";
 
 const Header: FC = () => {
-    const{isLog} =useAppSelector(state => state.authReducer)
+    const refresh = localStorage.getItem('refresh');
+    useEffect(() => {
+        }
+        , [refresh])
+    const {isLog} = useAppSelector(state => state.authReducer)
+    const dispatch = useAppDispatch()
+    const logout: any = async () => {
+        dispatch(await logoutUser())
+    }
+
+
+
     return (
         <div>
             <div className={'header_menu'}>
@@ -50,7 +63,8 @@ const Header: FC = () => {
                     <img src="/image-for-header/cart.png" width={'80px'} height={'50px'} alt="cart"/>
                 </div>
                 <div>
-                    <a href="/auth/login">{isLog?<div>Вийти</div>:<div>Увійти</div>} </a>
+                    <div>{refresh ? <button onClick={logout}><a href="/auth/login">Вийти</a></button> :
+                        <div><a href="/auth/login">Увійти</a></div>} </div>
                 </div>
             </div>
             <hr/>

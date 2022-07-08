@@ -1,22 +1,30 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {useForm} from "react-hook-form";
 import {IUser} from "../../../interfaces";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {loginUser} from "../../../store";
-import {userService} from "../../../services/user.service";
+import {Link, useNavigate} from "react-router-dom";
 
 
 const UserLogin: FC = () => {
-    const accessToken = localStorage.getItem('access');
-    const {isLog}=useAppSelector(state => state.authReducer)
+    let navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const checkRole: any = async () => {
+        const role = await localStorage.getItem('role')
+        if (role === 'user') {
+            navigate('/users')
+        }
+        if (role === 'admin') {
+            navigate('/admin/addDish')
+        }
+    }
+    const {isLog} = useAppSelector(state => state.authReducer)
+
     const {register, handleSubmit, reset} = useForm()
     const submit: any = async (data: Partial<IUser>) => {
-       await dispatch(loginUser(data))
+        await dispatch(loginUser(data))
+        await checkRole()
     }
-
-    //     const promise = userService.getAllUsers();
-    // console.log(promise)
 
 
     return (
@@ -27,14 +35,14 @@ const UserLogin: FC = () => {
                     <div><input type="text" placeholder={'password'}{...register('password')}/></div>
                 </div>
                 <div>
-                    <button >Login</button>
-                    {isLog ? <div>UserLogin</div>:<div>userNotLogin</div>}
+                    <button> Login</button>
                 </div>
                 <a href="#"><h4>Forgot Password?</h4></a>
+                <Link to={'/auth/registration'}>
                     <button>
                         Registration new account
                     </button>
-
+                </Link>
             </form>
         </div>
     );

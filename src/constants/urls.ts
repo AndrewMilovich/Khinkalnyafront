@@ -8,5 +8,6 @@ export const urls={
     refresh:'/auth/refresh',
     user:'/user',
     dish:'/dish',
-    locality:'/dish/locality'
+    locality:'/dish/locality',
+    logout: '/auth/logout'
 }

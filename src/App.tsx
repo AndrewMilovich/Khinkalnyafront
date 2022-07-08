@@ -6,7 +6,6 @@ import UserLogin from "./components/User/UserLogin/UserLogin";
 import Layout from "./components/Layout/Layout";
 import AddDish from "./components/addDish/addDish";
 import Users from "./components/Users/Users";
-import axios from "axios";
 
 function App() {
 
@@ -18,7 +17,6 @@ function App() {
                     <Route path={'/auth/login'} element={<UserLogin/>}></Route>
                     <Route path={'/admin/addDish'} element={<AddDish/>}></Route>
                     <Route path={'/users'} element={<Users/>}></Route>
-
                 </Route>
             </Routes>
         </div>
