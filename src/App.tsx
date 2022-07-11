@@ -8,6 +8,7 @@ import AddDish from "./components/addDish/addDish";
 import Users from "./components/Users/Users";
 import Main from "./components/Main/Main";
 import FirstDishes from "./components/FirstDishes/FirstDishes";
+import Khinkali from "./components/Khinkali/Khinkali";
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
                     <Route path={'/auth/login'} element={<UserLogin/>}></Route>
                     <Route path={'/admin/addDish'} element={<AddDish/>}></Route>
                     <Route path={'/users'} element={<Users/>}></Route>
+                    <Route path={'/dish/firstDishes'} element={<FirstDishes/>}></Route>
+                    <Route path={'/dish/khinkali'} element={<Khinkali/>}></Route>
                 </Route>
             </Routes>
         </div>

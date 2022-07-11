@@ -26,7 +26,6 @@ const UserLogin: FC = () => {
         await checkRole()
     }
 
-
     return (
         <div>
             <form onSubmit={handleSubmit(submit)}>

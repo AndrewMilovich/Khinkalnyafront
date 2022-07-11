@@ -1,17 +1,17 @@
-import React, {FC, useEffect} from 'react';
-import {getDishes} from "../../store/slices/dish.slice";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import FirstDishes from "../FirstDishes/FirstDishes";
+import React, {FC} from 'react';
+import {IDish} from "../../interfaces/dish.interface";
 
-const Dishes: FC = () => {
-    const {result} = useAppSelector(state => state.dishReducer)
-    const dispatch = useAppDispatch()
-    useEffect(() => {
-        dispatch(getDishes())
-    }, [])
+const Dishes: FC <{ results: IDish }> = ({results})=> {
+
     return (
         <div>
-            {result.map(results => <FirstDishes key={results.id} results={results}/>)}
+            <img width={'220px'} src={`${results.image}`} alt="dish"/>
+            <div>{results.name}</div>
+            <div style={{display: 'flex'}}>
+                <div>{results.weight}грам</div>
+                <div>{results.price}грн</div>
+            </div>
+            <button>купити</button>
         </div>
     );
 };

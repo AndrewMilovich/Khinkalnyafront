@@ -1,7 +1,7 @@
 import React from 'react';
 import {useAppDispatch} from "../../hooks/redux";
 import {useForm} from "react-hook-form";
-import {addLocality, addRestaurant} from "../../store/slices/admin.slice";
+import {addRestaurant} from "../../store/slices/admin.slice";
 
 const AddRestaurant = () => {
     const dispatch = useAppDispatch()

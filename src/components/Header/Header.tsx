@@ -27,9 +27,10 @@ const Header: FC = () => {
                     <img src="/image-for-header/discount.svg" width={'50px'} height={'40px'} alt="discount"/>
                     Акції
                 </div>
-                <div className={'item_header_menu'}>
+                <div className={'item_header_menu'}><a href="/dish/khinkali">
                     <img src="/image-for-header/khinkali.svg" width={'50px'} height={'40px'} alt="khinkali_menu"/>
                     Хінкалі
+                </a>
                 </div>
                 <div className={'item_header_menu'}>
                     <img src="/image-for-header/khachapuri.svg" width={'50px'} height={'40px'} alt="khachapuri_menu"/>
@@ -39,9 +40,10 @@ const Header: FC = () => {
                     <img src="/image-for-header/main_dish.svg" width={'50px'} height={'40px'} alt="main_dish_menu"/>
                     Гарячі Закуски
                 </div>
-                <div className={'item_header_menu'}>
+                <div className={'item_header_menu'}><a href="/dish/firstDishes">
                     <img src="/image-for-header/first_dish.svg" width={'50px'} height={'40px'} alt="first_dish_menu"/>
                     Перші Страви
+                </a>
                 </div>
                 <div className={'item_header_menu'}>
                     <img src="/image-for-header/salad.svg" width={'50px'} height={'40px'} alt="first_dish_menu"/>

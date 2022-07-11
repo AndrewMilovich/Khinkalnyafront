@@ -5,7 +5,6 @@ import {IDish} from "../../interfaces/dish.interface";
 import {addDish, getLocality, getRestaurant} from "../../store/slices/admin.slice";
 import AddLocality from "../addLocality/addLocality";
 import AddRestaurant from "../addRestautant/addRestaurant";
-import {getDishes} from "../../store/slices/dish.slice";
 
 const AddDish: FC = () => {
 
