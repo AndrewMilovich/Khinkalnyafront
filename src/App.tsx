@@ -6,6 +6,8 @@ import UserLogin from "./components/User/UserLogin/UserLogin";
 import Layout from "./components/Layout/Layout";
 import AddDish from "./components/addDish/addDish";
 import Users from "./components/Users/Users";
+import Main from "./components/Main/Main";
+import FirstDishes from "./components/FirstDishes/FirstDishes";
 
 function App() {
 
@@ -13,6 +15,7 @@ function App() {
         <div>
             <Routes>
                 <Route path={"/"} element={<Layout/>}>
+                    <Route path={'/main'} element={<Main/>}></Route>
                     <Route path={'/auth/registration'} element={<UserRegistration/>}></Route>
                     <Route path={'/auth/login'} element={<UserLogin/>}></Route>
                     <Route path={'/admin/addDish'} element={<AddDish/>}></Route>

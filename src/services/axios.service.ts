@@ -12,18 +12,14 @@ export const errorInterceptor = (axiosInstance: any) => {
     }, async (error:any) => {
         const originalConfig = error.config
         if (error.response.data.statusCode === 401) {
-            console.log(error.response.data)
             originalConfig._retry = true
             const refresh =await localStorage.getItem('refresh') as string;
             const promise = await authService.refresh(refresh);
-            console.log(promise)
             const tokenPair =await promise.data.tokenPair;
             localStorage.setItem('access', tokenPair.accessToken)
             localStorage.setItem('refresh', tokenPair.refreshToken)
             return axiosService(originalConfig)
         }
-        console.log(error.response)
-        return error.response
     });
 };
 
@@ -33,10 +29,7 @@ export const updateHeaderInterceptor = (axiosInstance:any) => {
         request.headers={
             Authorization:` Bearer ${access}`
         };
-        console.log(request)
         return request;
-    },(error:any) => {
-        console.log(error);
     });
 };
 

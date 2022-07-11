@@ -56,6 +56,7 @@ const authSlice = createSlice({
     reducers: {
         setToken: (state, action: any) => {
             state.error = action.payload.message
+            console.log(action.payload.message);
             const access_token = action.payload.tokenPair.accessToken
             localStorage.setItem('access', action.payload.tokenPair.accessToken)
             localStorage.setItem('refresh', action.payload.tokenPair.refreshToken)

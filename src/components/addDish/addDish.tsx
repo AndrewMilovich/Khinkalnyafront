@@ -2,14 +2,21 @@ import React, {FC, useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {IDish} from "../../interfaces/dish.interface";
-import {addDish, getLocality} from "../../store/slices/admin.slice";
+import {addDish, getLocality, getRestaurant} from "../../store/slices/admin.slice";
+import AddLocality from "../addLocality/addLocality";
+import AddRestaurant from "../addRestautant/addRestaurant";
+import {getDishes} from "../../store/slices/dish.slice";
 
 const AddDish: FC = () => {
-    const {locality} = useAppSelector(state => state.adminReducer)
+
+    const {locality, restaurant} = useAppSelector(state => state.adminReducer)
     const {register, handleSubmit, reset} = useForm()
+    const map = locality.map(value => value.Dish);
+    map[0]?.map(value => console.log(value))
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(getLocality())
+        dispatch(getRestaurant())
     }, [])
     const submit: any = async (data: IDish) => {
         const formData = new FormData();
@@ -19,19 +26,17 @@ const AddDish: FC = () => {
         formData.append('weight', data.weight.toString())
         formData.append('description', data.description)
         formData.append('localityId', data.localityId)
+        formData.append('restaurantId', data.restaurantId)
         await dispatch(addDish(formData))
-
     }
+
 
     return (
 
         <div>
-
             AddDish
             <form onSubmit={handleSubmit(submit)}>
                 <div>
-
-                    {/*{locality.map(value => <div>{value}</div>)}*/}
                     <div><input type="file" {...register('image')}/></div>
                     <div><input type="text" placeholder={'name'}{...register('name')}/></div>
                     <div><input type="number" placeholder={'price'}{...register('price')}/></div>
@@ -39,17 +44,24 @@ const AddDish: FC = () => {
                     <div><input type="text" placeholder={'description'}{...register('description')}/></div>
                     <select {...register('localityId')}  >
                         <option value="">Виберіть цех приготування</option>
-                        {locality && locality.map(result => <option key={result.id} value={result.id}>{result.name}</option>)}
+                        {locality && locality.map(result => <option key={result.id}
+                                                                    value={result.id}>{result.name}</option>)}
                     </select>
                     <div><input type="text" placeholder={'ingredients'}{...register('ingredients')}/></div>
-                    <div><input type="text" placeholder={'Restaurant'}{...register('Restaurant')}/></div>
+                    <select {...register('restaurantId')}  >
+                        <option value="">Виберіть ресторан</option>
+                        {restaurant && restaurant.map(result => <option key={result.id}
+                                                                        value={result.id}>{result.name}</option>)}
+                    </select>
                     <div>
-
                         <button>Add</button>
-
                     </div>
                 </div>
             </form>
+            <hr/>
+            <AddLocality/>
+            <hr/>
+            <AddRestaurant/>
         </div>
     );
 };
