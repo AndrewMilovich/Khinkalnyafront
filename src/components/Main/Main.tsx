@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {dishService} from "../../services/dish.service";
+import {IDish} from "../../interfaces/dish.interface";
+import BarChart from "../BarChart/BarChart";
 
 const Main = () => {
+
     return (
         <div>
-            {/*<video autoPlay loop muted >*/}
-            {/*    <source src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4' type='video/mp4'/>*/}
-            {/*</video>*/}
+            <BarChart  />
         </div>
     );
 };

@@ -1,24 +1,27 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {adminService} from "../../services/admin.service";
-import {ILocality} from "../../interfaces/locality.interface";
-import {IDish} from "../../interfaces/dish.interface";
+import {IDish, ILocality} from "../../interfaces";
 
 const initialState = {
     result: [],
     accessToken: '',
     locality: [] as ILocality[],
     restaurant: [] as ILocality[],
-    Dish: [] as IDish[]
+    Dish: [] as IDish[],
+    status: ''
 }
 export const getLocality = createAsyncThunk(
     'admin/addDish',
-    async (_, {dispatch}) => {
+    async (_, {dispatch, getState}) => {
         try {
-            const {data} = await adminService.getLocality()
-            console.log(data)
-            if (data) {
-                dispatch(setLocalityData(data))
+            const state = getState() as { adminReducer: { locality: ILocality[] } };
+            if (state.adminReducer.locality.length == 0) {
+                await adminService.getLocality().then(value => dispatch(setLocalityData(value.data)))
             }
+            if (state.adminReducer.locality.length > 0) {
+                dispatch(setLocalityData(state.adminReducer.locality))
+            }
+
         } catch (e) {
             console.log(e);
         }
@@ -38,11 +41,12 @@ export const getRestaurant = createAsyncThunk(
         }
     }
 )
+
 export const addRestaurant = createAsyncThunk(
     'admin/addRestaurant',
     async (data: any, {dispatch}) => {
         try {
-             await adminService.addRestaurant(data);
+            await adminService.addRestaurant(data);
         } catch (e) {
             console.log(e);
         }
@@ -50,9 +54,9 @@ export const addRestaurant = createAsyncThunk(
 )
 export const addLocality = createAsyncThunk(
     'admin/addLocality',
-    async (data: ILocality, {dispatch}) => {
+    async (data: any, {dispatch}) => {
         try {
-             await adminService.addLocality(data);
+            await adminService.addLocality(data);
         } catch (e) {
             console.log(e);
         }
@@ -62,8 +66,7 @@ export const addDish = createAsyncThunk(
     'admin/addDish',
     async (data: any, {dispatch}) => {
         try {
-             await adminService.addDish(data);
-            // console.log(response)
+            await adminService.addDish(data);
         } catch (e) {
             console.log(e);
         }
@@ -80,7 +83,16 @@ const adminSlice = createSlice({
         setRestaurantData: (state, action: PayloadAction<ILocality[]>) => {
             state.restaurant = action.payload;
         }
-    }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getLocality.pending, (state, action) => {
+            state.status = "Loading";
+        });
+        builder.addCase(getLocality.fulfilled, (state, action) => {
+            state.status = "fulfilled";
+            // state.locality = action.payload.data;
+        });
+}
 })
 const adminReducer = adminSlice.reducer;
 export default adminReducer;

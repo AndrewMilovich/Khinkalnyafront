@@ -10,8 +10,7 @@ const AddDish: FC = () => {
 
     const {locality, restaurant} = useAppSelector(state => state.adminReducer)
     const {register, handleSubmit, reset} = useForm()
-    const map = locality.map(value => value.Dish);
-    map[0]?.map(value => console.log(value))
+
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(getLocality())
@@ -29,7 +28,6 @@ const AddDish: FC = () => {
         await dispatch(addDish(formData))
     }
 
-
     return (
 
         <div>
@@ -40,17 +38,17 @@ const AddDish: FC = () => {
                     <div><input type="text" placeholder={'name'}{...register('name')}/></div>
                     <div><input type="number" placeholder={'price'}{...register('price')}/></div>
                     <div><input type="number" placeholder={'weight'}{...register('weight')}/></div>
-                    <div><input type="text" placeholder={'description'}{...register('description')}/></div>
+                    <div><input type="textBox" placeholder={'description'}{...register('description')}/></div>
                     <select {...register('localityId')}  >
                         <option value="">Виберіть цех приготування</option>
-                        {locality && locality.map(result => <option key={result.id}
-                                                                    value={result.id}>{result.name}</option>)}
+                        {locality && locality.map(result =>
+                            <option key={result.id} value={result.id}>{result.name}</option>)}
                     </select>
                     <div><input type="text" placeholder={'ingredients'}{...register('ingredients')}/></div>
                     <select {...register('restaurantId')}  >
                         <option value="">Виберіть ресторан</option>
-                        {restaurant && restaurant.map(result => <option key={result.id}
-                                                                        value={result.id}>{result.name}</option>)}
+                        {restaurant && restaurant.map(result =>
+                            <option key={result.id} value={result.id}>{result.name}</option>)}
                     </select>
                     <div>
                         <button>Add</button>

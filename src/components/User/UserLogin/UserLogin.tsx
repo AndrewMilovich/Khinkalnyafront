@@ -15,10 +15,12 @@ const UserLogin: FC = () => {
             navigate('/users')
         }
         if (role === 'admin') {
-            navigate('/admin/addDish')
+            navigate('/admin')
         }
+        console.log(role)
+
     }
-    const {isLog} = useAppSelector(state => state.authReducer)
+    const {isLog,status} = useAppSelector(state => state.authReducer)
 
     const {register, handleSubmit, reset} = useForm()
     const submit: any = async (data: Partial<IUser>) => {
