@@ -7,11 +7,9 @@ import {createOrder} from "../../store/slices/order.slice";
 const Dishes: FC<{ results: IDish }> = ({results}) => {
     const {orders} = useAppSelector(state => state.orderReducer);
     const dispatch = useAppDispatch();
-    const submit: any = () => {
-        dispatch(createOrder(results))
-    }
-   const item = localStorage.getItem('order');
-    console.log(item);
+    // const submit: any = () => {
+    //     dispatch(createOrder(results))
+    // }
 
     return (
         <div>

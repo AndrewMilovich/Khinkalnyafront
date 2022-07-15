@@ -19,13 +19,13 @@ export const getAllOrders = createAsyncThunk(
     }
 );
 
-export const saveOrderInDb=createAsyncThunk(
+export const saveOrderInDb = createAsyncThunk(
     'order/save',
-    async (data:any,{dispatch,rejectWithValue})=>{
+    async (data: any, {dispatch, rejectWithValue}) => {
         try {
-           const axiosResponse = await orderService.saveOrders(data);
-           console.log(axiosResponse)
-        }catch (e) {
+            const axiosResponse = await orderService.saveOrders(data);
+            console.log(axiosResponse)
+        } catch (e) {
             rejectWithValue(e)
         }
     }
@@ -48,8 +48,12 @@ const orderSlice = createSlice({
     initialState,
     reducers: {
         setOrder: (state, action) => {
+            if (state.orders.length === 0) {
+                const saveOrder = localStorage.getItem('order');
+                state.orders = JSON.parse(saveOrder as string)
+            }
             state.orders.push(action.payload)
-            localStorage.setItem('order',JSON.stringify(state.orders))
+            localStorage.setItem('order', JSON.stringify(state.orders))
         }
     },
     extraReducers: builder => {

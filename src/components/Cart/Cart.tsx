@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {IDish} from "../../interfaces";
 import Dishes from "../Dishes/Dishes";
 import {useAppDispatch} from "../../hooks/redux";
@@ -11,6 +11,8 @@ const Cart = () => {
     const item = localStorage.getItem('order');
     const dishFromCart = JSON.parse(item as string) as IDish[];
     console.log(dishFromCart);
+
+
 // dishFromCart.map(value => value.price)
     let arrDishId: number[] = []
 
@@ -18,6 +20,10 @@ const Cart = () => {
         totalPrice += iDish.price
         arrDishId.push(iDish.id)
     }
+
+    useEffect(()=>{
+
+    },)
 
     console.log(totalPrice)
 
