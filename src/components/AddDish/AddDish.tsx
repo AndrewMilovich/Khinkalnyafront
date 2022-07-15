@@ -1,10 +1,11 @@
 import React, {FC, useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {IDish} from "../../interfaces/dish.interface";
-import {addDish, getLocality, getRestaurant} from "../../store/slices/admin.slice";
-import AddLocality from "../addLocality/addLocality";
-import AddRestaurant from "../addRestautant/addRestaurant";
+
+import AddLocality from "../AddLocality/AddLocality";
+import AddRestaurant from "../AddRestautant/AddRestaurant";
+import {addDish, getLocality, getRestaurant} from "../../store";
+import {IDish} from "../../interfaces";
 
 const AddDish: FC = () => {
 

@@ -9,5 +9,5 @@ export interface IUser {
     id?: number,
     phone?: string,
     role?: string,
-    createdAt?: Date
+    createdAt: string
 }

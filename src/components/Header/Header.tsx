@@ -30,6 +30,11 @@ const Header: FC = () => {
                     <div>{value.name}</div>
                 </div>)}
                 <div>
+                    <Link to={"/cart"}>
+                    <img src="/image-for-header/cart.png" width={'80px'} height={'50px'} alt="cart"/>
+                    </Link>
+                </div>
+                <div>
                     <div>{refresh ? <button onClick={logout}><a href="/auth/login">Вийти</a></button> :
                         <div><a href="/auth/login">Увійти</a></div>} </div>
                 </div>

@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {dishService} from "../../services/dish.service";
-import {IDish} from "../../interfaces/dish.interface";
-import BarChart from "../BarChart/BarChart";
+import Cart from "../Cart/Cart";
 
 const Main = () => {
 
     return (
         <div>
-            <BarChart  />
+            {/*<BarChart  />*/}
+            <Cart/>
         </div>
     );
 };

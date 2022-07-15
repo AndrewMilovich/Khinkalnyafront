@@ -11,7 +11,7 @@ const initialState = {
     status: ''
 }
 export const getLocality = createAsyncThunk(
-    'admin/addDish',
+    'admin/AddDish',
     async (_, {dispatch, getState}) => {
         try {
             const state = getState() as { adminReducer: { locality: ILocality[] } };
@@ -28,7 +28,7 @@ export const getLocality = createAsyncThunk(
     }
 )
 export const getRestaurant = createAsyncThunk(
-    'admin/addDish',
+    'admin/AddDish',
     async (_, {dispatch}) => {
         try {
             const {data} = await adminService.getRestaurant()
@@ -53,7 +53,7 @@ export const addRestaurant = createAsyncThunk(
     }
 )
 export const addLocality = createAsyncThunk(
-    'admin/addLocality',
+    'admin/AddLocality',
     async (data: any, {dispatch}) => {
         try {
             await adminService.addLocality(data);
@@ -63,7 +63,7 @@ export const addLocality = createAsyncThunk(
     }
 )
 export const addDish = createAsyncThunk(
-    'admin/addDish',
+    'admin/AddDish',
     async (data: any, {dispatch}) => {
         try {
             await adminService.addDish(data);
